@@ -1,0 +1,71 @@
+﻿@using EntityLayer.Concrete
+@model List<Experience>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Deneyim Listesi Tablosu</h3>
+</div>
+<!-- Light table -->
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="sort" data-sort="name">#</th>
+                <th scope="col" class="sort" data-sort="budget">Başlık</th>
+                <th scope="col" class="sort" data-sort="status">Tarih</th>
+                <th scope="col">Sil</th>
+                <th scope="col" class="sort" data-sort="completion">Düzenle</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="list">
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <th>
+                        @item.ExperienceID
+                    </th>
+                    <th class="budget">
+                        @item.Name
+                    </th>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Sil</button>
+                    </td>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Silme İşlemi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Silmek istediğinize emin misiniz?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/Experience/DeleteExperience/@item.ExperienceID" class="btn btn-danger">Evet</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <td> <a href="/Experience/EditExperience/@item.ExperienceID" class="btn btn-success">Güncelle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Experience/AddExperience/" class="btn btn-primary">Yeni Deneyim Ekle </a>
+</div>
+
