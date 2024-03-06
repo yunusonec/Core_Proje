@@ -37,8 +37,31 @@
                     <td>
                         @item.Date
                     </td>
-                    <td> <a href="/Skill/DeleteSkill/@item.ExperienceID" class="btn btn-danger">Sil</a></td>
-                    <td> <a href="/Skill/EditSkill/@item.ExperienceID" class="btn btn-success">Güncelle</a></td>
+                    <td>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Sil</button>
+                    </td>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Silme İşlemi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Silmek istediğinize emin misiniz?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/Experience/DeleteExperience/@item.ExperienceID" class="btn btn-danger">Evet</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <td> <a href="/Experience/EditExperience/@item.ExperienceID" class="btn btn-success">Güncelle</a></td>
                 </tr>
             }
         </tbody>
