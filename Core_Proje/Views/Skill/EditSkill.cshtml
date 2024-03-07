@@ -12,9 +12,11 @@
     <br />
     @Html.Label("Yetenek Başlığı")
     @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
     <br />
     <label>Deger</label>
     @Html.TextBoxFor(x => x.Value, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Value, null, new { @class = "text-danger" })
     <br />
     <button class="btn btn-success">Güncelle</button>
 }
