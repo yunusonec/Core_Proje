@@ -11,11 +11,9 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int ExperienceID { get; set; }
-        [Required]
         public string? Name { get; set;}
         public string? Date { get; set;}
         public string? ImageUrl { get; set;}
-        [Required]
         public string? Description { get; set; }
 
     }
