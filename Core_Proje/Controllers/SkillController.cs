@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Proje.Controllers
@@ -27,8 +29,21 @@ namespace Core_Proje.Controllers
         [HttpPost]
         public IActionResult AddSkill(Skill skill ) 
         {
-            skillManager.TAdd(skill);
-            return RedirectToAction("Index");
+            SkillValidator validations = new SkillValidator();
+            ValidationResult result = validations.Validate(skill);
+            if (result.IsValid)
+            {
+                skillManager.TAdd(skill);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
         }
         public IActionResult DeleteSkill(int id) 
         {
@@ -48,8 +63,22 @@ namespace Core_Proje.Controllers
         [HttpPost]
         public IActionResult EditSkill(Skill skill)
         {
-            skillManager.TUpdate(skill);
-            return RedirectToAction("Index");
+            SkillValidator validations = new SkillValidator();
+            ValidationResult result = validations.Validate(skill);
+            if (result.IsValid)
+            {
+                skillManager.TUpdate(skill);
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
         }
     }
 }
