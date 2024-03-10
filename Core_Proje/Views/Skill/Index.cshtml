@@ -2,77 +2,75 @@
 @model List<Skill>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
 
-<div class="card-header border-0">
-    <h3 class="mb-0">Yetenek Listesi Tablosu</h3>
-</div>
-<!-- Light table -->
-<div class="table-responsive">
-    <table class="table align-items-center table-flush">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col" class="sort" data-sort="name">#</th>
-                <th scope="col" class="sort" data-sort="budget">Başlık</th>
-                <th scope="col" class="sort" data-sort="status">Oran</th>
-                <th scope="col">Sil</th>
-                <th scope="col" class="sort" data-sort="completion">Düzenle</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody class="list">
-            
-            @foreach(var item in Model)
-            {
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yetenekler</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Oran</th>
+                            <th>Sil</th>
+                            <th>Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.SkillID</td>
+                                <td>@item.Title</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="completion mr-2">@item.Value</span>
+                                        <div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" style="width:@item.Value%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete_@item.SkillID">Sil</button>
+                                </td>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="confirmDelete_@item.SkillID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Silme İşlemi</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Silmek istediğinize emin misiniz?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="/Skill/DeleteSkill/@item.SkillID" class="btn btn-danger">Evet</a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <td><a href="/Skill/EditSkill/@item.SkillID" class="btn btn-primary">Düzenle</a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
                 
+            </div>
             
-            <tr>
-                <th>
-                    @item.SkillID
-                </th>
-                <td class="budget">
-                    @item.Title
-                </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <span class="completion mr-2">@item.Value</span>
-                        <div>
-                            <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" style="width:@item.Value%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                    <td>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete_@item.SkillID">Sil</button>
-                    </td>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="confirmDelete_@item.SkillID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Silme İşlemi</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Silmek istediğinize emin misiniz?
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="/Skill/DeleteSkill/@item.SkillID" class="btn btn-danger">Evet</a>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <td> <a href="/Skill/EditSkill/@item.SkillID" class="btn btn-success">Güncelle</a></td>
-            </tr>
-            }
-        </tbody>
-    </table>
-    <a href="/Skill/AddSkill/" class="btn btn-primary">Yeni Yetenek Ekle </a>
+        </div>
+    </div>
 </div>
-
+<a href="/Skill/AddSkill/" class="btn btn-info">Yeni Deneyim Ekle</a>

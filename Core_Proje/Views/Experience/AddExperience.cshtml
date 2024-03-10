@@ -1,33 +1,41 @@
 ﻿@model EntityLayer.Concrete.Experience
 @{
     ViewData["Title"] = "AddExperience";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
-
-<div class="card-header border-0">
-    <h3 class="mb-0">Deneyim Ekleme Sayfası</h3>
-</div>
 @using (Html.BeginForm("AddExperience", "Experience", FormMethod.Post))
 {
-    <br />
-    @Html.Label("Deneyim Başlığı")
-    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
-    <br />
-    <label>Tarih</label>
-    @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.Date, null, new { @class = "text-danger" })
-    <br />
-    <label>Resim Yolu</label>
-    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger" })
-    <br />
-    <label>Açıklama</label>
-    @Html.TextAreaFor(x => x.Description, 10, 3, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })
-
-    <br />
-    <button class="btn btn-info">Kaydet</button>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description"> Yeni Deneyim Ekleme Paneli </p>
+                <form class="forms-sample">
+                    <div class="form-group">
+                        <label>Başlık</label>
+                        <input type="text" class="form-control" name="Name">
+                        @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Tarih</label>
+                        <input type="text" class="form-control" name="Date">
+                        @Html.ValidationMessageFor(x => x.Date, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Görsel URL</label>
+                        <input type="text" class="form-control" name="ImageURL">
+                        @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Açıklama</label>
+                        <textarea class="form-control" name="Description" rows="6"></textarea>
+                        @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+                    <button class="btn btn-dark">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
 }
 
 
